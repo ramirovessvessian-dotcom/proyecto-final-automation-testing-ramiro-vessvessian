@@ -1,13 +1,26 @@
 from selenium.webdriver.common.by import By
 from selenium import webdriver
+import pytest
+from pages.inventory_page import InventoryPage
 
-def test_inventory(login_in_driver):
+
+@pytest.mark.parametrize("usuario, password", [("standard_user", "secret_sauce")])
+def test_inventory(login_in_driver,usuario, password):
     try:
         driver = login_in_driver
-        assert driver.title == "Swag Labs"
+        inventory_page = InventoryPage(driver)
 
-        products  = driver.find_elements(By.CLASS_NAME, "inventory_item")
-        assert len(products) > 0, "No hay productos visibles en la pagina"
+        #Verificar que hay productos
+        assert len(inventory_page.obtener_todos_los_productos()) > 0, "El inventario esta vacio"
+
+        #Verificar que el carrito este vacio al principio
+        assert inventory_page.obtener_conteo_carrito() == 0
+
+        #Agregar el primer producto
+        inventory_page.agregar_primer_producto()
+
+        #Verificar el contador del carrito
+        assert inventory_page.obtener_conteo_carrito() == 1
 
     except Exception as e:
         print(f"Error en test_inventory: {e}")
