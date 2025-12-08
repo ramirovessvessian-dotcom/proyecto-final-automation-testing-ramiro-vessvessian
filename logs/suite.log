@@ -1,0 +1,10 @@
+2025-12-08 15:28:24 INFO TalentoTech Completando con los datos de usuario
+2025-12-08 15:28:27 INFO TalentoTech verficando redireccionamiento dentro de la pagina
+2025-12-08 15:28:27 INFO TalentoTech test de login completado
+2025-12-08 15:28:31 INFO TalentoTech Completando con los datos de usuario
+2025-12-08 15:28:34 INFO TalentoTech Test de login fallido completado con exito
+2025-12-08 15:29:41 INFO TalentoTech Relizando la solitud GET a https://reqres.in/api/users 
+2025-12-08 15:29:42 INFO TalentoTech Status code: 200
+2025-12-08 15:29:42 INFO TalentoTech Validando el id dentro del usuario
+2025-12-08 19:18:23 INFO TalentoTech Completando con los datos de usuario
+2025-12-08 19:18:26 INFO TalentoTech Haciendo prueba de la cantidad de productos en el carrito

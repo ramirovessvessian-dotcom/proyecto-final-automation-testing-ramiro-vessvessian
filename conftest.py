@@ -1,21 +1,27 @@
-from selenium import webdriver
 import pytest
+from selenium import webdriver
 from pages.login_page import LoginPage
 from selenium.webdriver.chrome.options import Options
 
+import pathlib
+from datetime import datetime
+import time
+
+target = pathlib.Path("reports/screens")
+target.mkdir(parents=True, exist_ok=True)
+
 @pytest.fixture
 def driver():
-    #Vamos al incognito
     options = Options()
     options.add_argument("--incognito")
 
-    driver = webdriver.Chrome(options = options)
+    driver = webdriver.Chrome(options=options)
     yield driver
     driver.quit()
 
 @pytest.fixture
-def login_in_driver(driver, usuario, password):
-    LoginPage(driver).abrir_pagina().login_completo(usuario, password)
+def login_in_driver(driver):
+    LoginPage(driver).abrir_pagina()
     return driver
 
 @pytest.fixture
@@ -24,4 +30,19 @@ def url_base():
 
 @pytest.fixture
 def header_request():
-    return {"x-api-key": "reqres-free-v1"}
+    return {"x-api-key": "reqres_f61dd8fd5bfd46a2b62d8d1300f50970"}
+#reqres-free-v1
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item,call):
+    outcome = yield
+
+    report = outcome.get_result()
+
+    if report.when in ("setup","call") and report.failed:
+        driver = item.funcargs.get("driver",None)
+        
+        if driver:
+            timestamp_comun= datetime.now().strftime("%Y%m%d_%H%M%S")
+            timestamp_unix = int(time.time())
+            file_name= target / f"{report.when}_{item.name}_{timestamp_unix}.png"
+            driver.save_screenshot(str(file_name))
