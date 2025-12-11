@@ -20,9 +20,7 @@ El proyecto genera tres tipos principales de resultados durante la ejecucion de 
 **archivo de log**
 
 ### Reporte HTML
-Se genera un reporte HTML detallado con el nombre
-de ```reporte.html``` en la **carpeta raiz** del
-proyecto
+Se genera un reporte HTML detallado con el nombre de ```reporte.html``` en la carpeta reports del proyecto
 
 ### Logs de ejecución
 Tambien se genera un log con información detallada de toda la ejecución de las pruebas en la siguiente ubicacion: ```logs/suite.log```
